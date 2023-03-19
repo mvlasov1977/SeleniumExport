@@ -37,7 +37,7 @@ public class MyNewClass {
     public void tearDown() {
         driver.quit();
     }
-    @Test
+    /* @Test
     public void checkdescriptionofgoods() {
         driver.get("https://www.saucedemo.com/");
         driver.manage().window().setSize(new Dimension(1623, 1019));
@@ -70,5 +70,55 @@ public class MyNewClass {
         driver.findElement(By.id("continue")).click();
         //summary_info_label summary_total_label; Total: $32.39
         assertEquals(driver.findElement(By.className("summary_total_label")).getText(),"Total: $32.39");
+    } */
+    @Test
+    public void AT_CreateUser() {
+        driver.get("https://guest:welcome2qauto@qauto.forstudy.space/");
+        driver.manage().window().setSize(new Dimension(1623, 1019));
+        driver.findElement(By.className("btn-outline-white")).click();
+        assertEquals(driver.findElement(By.className("modal-title")).getText(),"Log in");
+        //assertEquals(driver.findElements(By.className("btn-link")).get(1).getText(),"Registration");
+        driver.findElements(By.className("btn-link")).get(1).click();
+        //assertEquals(driver.findElement(By.className("modal-title")).getText(),"Registration");
+        driver.findElement(By.id("signupName")).sendKeys("Maks");
+        driver.findElement(By.id("signupLastName")).sendKeys("Vlasov");
+        driver.findElement(By.id("signupEmail")).sendKeys("maks@vlasov.ua");
+        driver.findElement(By.id("signupPassword")).sendKeys("Qwerty12345");
+        driver.findElement(By.id("signupRepeatPassword")).sendKeys("Qwerty12345");
+        driver.findElement(By.id("signupEmail")).click();
+        driver.findElements(By.className("btn-primary")).get(1).click();
+        //assertEquals(driver.findElement(By.className("dropdown-toggle")).getText(),"My profile");
+        //assertNotEquals(driver.findElement(By.className("alert-danger")).getText(),"User already exists");
+        //assertEquals(driver.findElement(By.className("panel-empty_message")).getText() , "You don’t have any cars in your garage");
+    }
+    @Test
+    public void AT_DeleteUser() {
+        driver.get("https://guest:welcome2qauto@qauto.forstudy.space/");
+        driver.manage().window().setSize(new Dimension(1623, 1019));
+        //System.out.println(driver.getTitle()+" "+driver.getCurrentUrl()+" "+driver.getPageSource());
+
+        driver.findElement(By.className("btn-outline-white")).click();
+
+        //assertEquals(driver.findElement(By.className("modal-title")).getText(),"Log in");
+        driver.findElement(By.id("signinEmail")).click();
+        driver.findElement(By.id("signinEmail")).sendKeys("maks@vlasov.ua");
+        driver.findElement(By.id("signinPassword")).click();
+        driver.findElement(By.id("signinPassword")).sendKeys("Qwerty12345");
+        //driver.findElement(By.id("signinEmail")).click();
+        //System.out.println(driver.getPageSource());
+
+        driver.findElement(By.cssSelector(".btn-primary:nth-child(2)")).click();
+        //driver.findElements(By.className("btn-primary")).get(1).click();
+
+        //System.out.println(driver.getPageSource());
+
+        driver.findElement(By.linkText("Settings")).click();
+        driver.findElement(By.cssSelector(".btn-danger-bg")).click();
+        driver.findElement(By.cssSelector(".btn-danger")).click();
+        //btn btn-white btn-sidebar sidebar_btn /panel/settings
+        //assertEquals(driver.findElement(By.tagName("You have been successfully logged in")).getText(),"Log in");
+        //assertEquals(driver.findElement(By.className("modal-title")).getText(),"qqq");
+        //assertEquals(driver.findElement(By.className("panel-empty_message")).getText() , "You don’t have any cars in your garage");
+
     }
 }
