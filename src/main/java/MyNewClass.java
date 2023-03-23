@@ -87,6 +87,9 @@ public class MyNewClass {
         driver.findElement(By.id("signupRepeatPassword")).sendKeys("Qwerty12345");
         driver.findElement(By.id("signupEmail")).click();
         driver.findElements(By.className("btn-primary")).get(1).click();
+
+        //System.out.println(driver.getPageSource());
+
         //assertEquals(driver.findElement(By.className("dropdown-toggle")).getText(),"My profile");
         //assertNotEquals(driver.findElement(By.className("alert-danger")).getText(),"User already exists");
         //assertEquals(driver.findElement(By.className("panel-empty_message")).getText() , "You don’t have any cars in your garage");
@@ -107,14 +110,17 @@ public class MyNewClass {
         //driver.findElement(By.id("signinEmail")).click();
         //System.out.println(driver.getPageSource());
 
-        driver.findElement(By.cssSelector(".btn-primary:nth-child(2)")).click();
-        //driver.findElements(By.className("btn-primary")).get(1).click();
+        //driver.findElement(By.cssSelector(".btn-primary:nth-child(2)")).click();
+        System.out.println(driver.getPageSource());
+        driver.findElements(By.className("btn-primary")).get(1).click();
 
-        //System.out.println(driver.getPageSource());
+        System.out.println(driver.getPageSource());
 
-        driver.findElement(By.linkText("Settings")).click();
-        driver.findElement(By.cssSelector(".btn-danger-bg")).click();
-        driver.findElement(By.cssSelector(".btn-danger")).click();
+
+        //driver.findElement(By.linkText("Settings")).click();
+        //driver.findElement(By.cssSelector(".btn-danger-bg")).click();
+        //driver.findElement(By.cssSelector(".btn-danger")).click();
+
         //btn btn-white btn-sidebar sidebar_btn /panel/settings
         //assertEquals(driver.findElement(By.tagName("You have been successfully logged in")).getText(),"Log in");
         //assertEquals(driver.findElement(By.className("modal-title")).getText(),"qqq");
