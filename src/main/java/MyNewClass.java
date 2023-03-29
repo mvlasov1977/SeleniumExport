@@ -29,13 +29,24 @@ public class MyNewClass {
     @Before
     public void setUp() {
         System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
+
         driver = new ChromeDriver();
         js = (JavascriptExecutor) driver;
         vars = new HashMap<String, Object>();
+
+       /* //C:\Install\QATest\QAHomework\JavaAutotest
+        System.setProperty("webdriver.gecko.driver","src/main/resources/geckodriver_32.exe" );
+
+        //WebDriver driver = new FirefoxDriver();
+        DesiredCapabilities capabilities = DesiredCapabilities.firefox();
+        capabilities.setCapability("marionette",true);
+         driver = new FirefoxDriver(capabilities); */
+
     }
     @After
     public void tearDown() {
         driver.quit();
+        //driver1.quiit();
     }
     /* @Test
     public void checkdescriptionofgoods() {
@@ -74,11 +85,13 @@ public class MyNewClass {
     @Test
     public void AT_CreateUser() {
         driver.get("https://guest:welcome2qauto@qauto.forstudy.space/");
-        driver.manage().window().setSize(new Dimension(1623, 1019));
-        driver.findElement(By.className("btn-outline-white")).click();
+        driver.manage().window().setSize(new Dimension(1674, 621));
+        driver.findElement(By.cssSelector(".btn-outline-white")).click();
+        //driver.findElement(By.className("btn-outline-white")).click();
         assertEquals(driver.findElement(By.className("modal-title")).getText(),"Log in");
         //assertEquals(driver.findElements(By.className("btn-link")).get(1).getText(),"Registration");
-        driver.findElements(By.className("btn-link")).get(1).click();
+        driver.findElement(By.cssSelector(".btn-link:nth-child(1)")).click();
+        //driver.findElements(By.className("btn-link")).get(1).click();
         //assertEquals(driver.findElement(By.className("modal-title")).getText(),"Registration");
         driver.findElement(By.id("signupName")).sendKeys("Maks");
         driver.findElement(By.id("signupLastName")).sendKeys("Vlasov");
@@ -86,9 +99,11 @@ public class MyNewClass {
         driver.findElement(By.id("signupPassword")).sendKeys("Qwerty12345");
         driver.findElement(By.id("signupRepeatPassword")).sendKeys("Qwerty12345");
         driver.findElement(By.id("signupEmail")).click();
-        driver.findElements(By.className("btn-primary")).get(1).click();
+        driver.findElement(By.cssSelector(".btn-primary:nth-child(1)")).click();
+        //driver.get("https://qauto.forstudy.space/panel/garage");
+        //driver.findElements(By.className("btn-primary")).get(1).click();
 
-        //System.out.println(driver.getPageSource());
+        System.out.println(driver.getPageSource());
 
         //assertEquals(driver.findElement(By.className("dropdown-toggle")).getText(),"My profile");
         //assertNotEquals(driver.findElement(By.className("alert-danger")).getText(),"User already exists");
@@ -127,4 +142,5 @@ public class MyNewClass {
         //assertEquals(driver.findElement(By.className("panel-empty_message")).getText() , "You don’t have any cars in your garage");
 
     }
+
 }
