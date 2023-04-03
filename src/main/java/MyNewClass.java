@@ -83,64 +83,76 @@ public class MyNewClass {
         assertEquals(driver.findElement(By.className("summary_total_label")).getText(),"Total: $32.39");
     } */
     @Test
-    public void AT_CreateUser() {
-        driver.get("https://guest:welcome2qauto@qauto.forstudy.space/");
+    public void AT_Ordering_FinalHeader() {
+        driver.get("https://www.saucedemo.com/");
         driver.manage().window().setSize(new Dimension(1674, 621));
-        driver.findElement(By.cssSelector(".btn-outline-white")).click();
-        //driver.findElement(By.className("btn-outline-white")).click();
-        assertEquals(driver.findElement(By.className("modal-title")).getText(),"Log in");
-        //assertEquals(driver.findElements(By.className("btn-link")).get(1).getText(),"Registration");
-        driver.findElement(By.cssSelector(".btn-link:nth-child(1)")).click();
-        //driver.findElements(By.className("btn-link")).get(1).click();
-        //assertEquals(driver.findElement(By.className("modal-title")).getText(),"Registration");
-        driver.findElement(By.id("signupName")).sendKeys("Maks");
-        driver.findElement(By.id("signupLastName")).sendKeys("Vlasov");
-        driver.findElement(By.id("signupEmail")).sendKeys("maks@vlasov.ua");
-        driver.findElement(By.id("signupPassword")).sendKeys("Qwerty12345");
-        driver.findElement(By.id("signupRepeatPassword")).sendKeys("Qwerty12345");
-        driver.findElement(By.id("signupEmail")).click();
-        driver.findElement(By.cssSelector(".btn-primary:nth-child(1)")).click();
-        //driver.get("https://qauto.forstudy.space/panel/garage");
-        //driver.findElements(By.className("btn-primary")).get(1).click();
+        driver.findElement(By.id("user-name")).sendKeys("standard_user");
+        driver.findElement(By.id("password")).sendKeys("secret_sauce");
+        driver.findElement(By.id("login-button")).click();
+        driver.findElement(By.id("add-to-cart-sauce-labs-backpack")).click();
+        driver.findElement(By.className("shopping_cart_link")).click();
+        driver.findElement(By.id("checkout")).click();
+        driver.findElement(By.id("first-name")).sendKeys("Maks");
+        driver.findElement(By.id("last-name")).sendKeys("Vlasov");
+        driver.findElement(By.id("postal-code")).sendKeys("65009");
+        driver.findElement(By.id("continue")).click();
+        driver.findElement(By.id("finish")).click();
 
-        System.out.println(driver.getPageSource());
-
-        //assertEquals(driver.findElement(By.className("dropdown-toggle")).getText(),"My profile");
-        //assertNotEquals(driver.findElement(By.className("alert-danger")).getText(),"User already exists");
-        //assertEquals(driver.findElement(By.className("panel-empty_message")).getText() , "You don’t have any cars in your garage");
+        assertEquals(driver.findElement(By.className("complete-header")).getText(),"Thank you for your order!");
     }
     @Test
-    public void AT_DeleteUser() {
-        driver.get("https://guest:welcome2qauto@qauto.forstudy.space/");
-        driver.manage().window().setSize(new Dimension(1623, 1019));
-        //System.out.println(driver.getTitle()+" "+driver.getCurrentUrl()+" "+driver.getPageSource());
+    public void AT_Ordering_FinalText() {
+        driver.get("https://www.saucedemo.com/");
+        driver.manage().window().setSize(new Dimension(1674, 621));
+        driver.findElement(By.id("user-name")).sendKeys("standard_user");
+        driver.findElement(By.id("password")).sendKeys("secret_sauce");
+        driver.findElement(By.id("login-button")).click();
+        driver.findElement(By.id("add-to-cart-sauce-labs-backpack")).click();
+        driver.findElement(By.className("shopping_cart_link")).click();
+        driver.findElement(By.id("checkout")).click();
+        driver.findElement(By.id("first-name")).sendKeys("Maks");
+        driver.findElement(By.id("last-name")).sendKeys("Vlasov");
+        driver.findElement(By.id("postal-code")).sendKeys("65009");
+        driver.findElement(By.id("continue")).click();
+        driver.findElement(By.id("finish")).click();
 
-        driver.findElement(By.className("btn-outline-white")).click();
+        assertEquals(driver.findElement(By.className("complete-text")).getText(),"Your order has been dispatched, and will arrive just as fast as the pony can get there!");
+    }
+    @Test
+    public void AT_RemovingItemFromTheCart_StartPage() {
+        driver.get("https://www.saucedemo.com/");
+        driver.manage().window().setSize(new Dimension(1674, 621));
+        driver.findElement(By.id("user-name")).sendKeys("standard_user");
+        driver.findElement(By.id("password")).sendKeys("secret_sauce");
+        driver.findElement(By.id("login-button")).click();
+        driver.findElement(By.id("add-to-cart-sauce-labs-backpack")).click();
+        driver.findElement(By.id("remove-sauce-labs-backpack")).click();
+        driver.findElement(By.className("shopping_cart_link")).click();
 
-        //assertEquals(driver.findElement(By.className("modal-title")).getText(),"Log in");
-        driver.findElement(By.id("signinEmail")).click();
-        driver.findElement(By.id("signinEmail")).sendKeys("maks@vlasov.ua");
-        driver.findElement(By.id("signinPassword")).click();
-        driver.findElement(By.id("signinPassword")).sendKeys("Qwerty12345");
-        //driver.findElement(By.id("signinEmail")).click();
-        //System.out.println(driver.getPageSource());
+        if (driver.findElements(By.className("inventory_item_name")).size() > 0) {
+            System.out.println("Warning! I don't expect items in the Cart, but I found: "+ driver.findElements(By.className("inventory_item_name")).size());
+            for(int i = 0; i<driver.findElements(By.className("inventory_item_name")).size(); i++){
+                assertNotEquals(driver.findElements(By.className("inventory_item_name")).get(i).getText(),"Sauce Labs Backpack");
+            }
+        }
+    }
+    @Test
+    public void AT_RemovingItemFromTheCart_CartPage() {
+        driver.get("https://www.saucedemo.com/");
+        driver.manage().window().setSize(new Dimension(1674, 621));
+        driver.findElement(By.id("user-name")).sendKeys("standard_user");
+        driver.findElement(By.id("password")).sendKeys("secret_sauce");
+        driver.findElement(By.id("login-button")).click();
+        driver.findElement(By.id("add-to-cart-sauce-labs-backpack")).click();
+        driver.findElement(By.className("shopping_cart_link")).click();
+        driver.findElement(By.id("remove-sauce-labs-backpack")).click();
 
-        //driver.findElement(By.cssSelector(".btn-primary:nth-child(2)")).click();
-        System.out.println(driver.getPageSource());
-        driver.findElements(By.className("btn-primary")).get(1).click();
-
-        System.out.println(driver.getPageSource());
-
-
-        //driver.findElement(By.linkText("Settings")).click();
-        //driver.findElement(By.cssSelector(".btn-danger-bg")).click();
-        //driver.findElement(By.cssSelector(".btn-danger")).click();
-
-        //btn btn-white btn-sidebar sidebar_btn /panel/settings
-        //assertEquals(driver.findElement(By.tagName("You have been successfully logged in")).getText(),"Log in");
-        //assertEquals(driver.findElement(By.className("modal-title")).getText(),"qqq");
-        //assertEquals(driver.findElement(By.className("panel-empty_message")).getText() , "You don’t have any cars in your garage");
+        if (driver.findElements(By.className("inventory_item_name")).size() > 0) {
+            System.out.println("Warning! I don't expect items in the Cart, but I found: "+ driver.findElements(By.className("inventory_item_name")).size());
+            for(int i = 0; i<driver.findElements(By.className("inventory_item_name")).size(); i++){
+                assertNotEquals(driver.findElements(By.className("inventory_item_name")).get(i).getText(),"Sauce Labs Backpack");
+            }
+        }
 
     }
-
 }
